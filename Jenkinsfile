@@ -11,15 +11,15 @@ pipeline {
       }
     } 
     
-    stage('Test') {
+    stage('Build') {
       steps {
-        sh "mvn -B test"
+        sh "mvn -B -DskipTests package"
       }
     }
     
-    stage('Build') {
+    stage('Test') {
       steps {
-        sh "mvn -DskipTests package"   
+        sh "mvn -B test"   
       }
     }
     
