@@ -26,7 +26,7 @@ pipeline {
     stage('Build Image') {
       steps {
         script {
-          withCluster() {
+          openshift.withCluster() {
             openshift.selector("bc", "${APP_NAME}").startBuild("--from-dir=. --build-loglevel=5").logs("-f")
           }
         }
