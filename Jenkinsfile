@@ -34,7 +34,7 @@ pipeline {
             // Extract abbreviated git commit id
             def props = readProperties file: "target/classes/git.properties"
             echo props['git.commit.id.abbrev']
-            echo "${GIT_REVISION,length=8}"
+            echo ${GIT_REVISION[0..7]}
             
           }
         }
