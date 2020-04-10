@@ -27,7 +27,7 @@ pipeline {
       steps {
         script {
           openshift.withCluster() {
-            openshift.selector("bc", "${APP_NAME}").startBuild("--from-dir=. --build-loglevel=5").logs("-f")
+            openshift.selector("bc", "${APP_NAME}").startBuild("--from-dir=target/ --build-loglevel=5").logs("-f")
           }
         }
       }
