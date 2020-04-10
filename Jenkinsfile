@@ -1,6 +1,8 @@
 pipeline {
   agent {
-    label 'maven'
+    node {
+      label 'maven'
+    }
   }
   
   stages {    
@@ -28,6 +30,10 @@ pipeline {
         script {
           openshift.withCluster() {
             openshift.selector("bc", "${APP_NAME}").startBuild("--from-dir=target/ --build-loglevel=5").logs("-f")
+            
+            def props = readProperties file: "target/classes/git.properties"
+            echo props['git.commit.id.abbrev']
+            
           }
         }
       }
