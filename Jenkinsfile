@@ -34,9 +34,10 @@ pipeline {
             // Extract abbreviated git commit id
             def props = readProperties file: "target/classes/git.properties"
             def abbrev = props['git.commit.id.abbrev']
-            def tag = """${APP_NAME}:$abbrev"""
-            echo tag
+            def src_tag = """${APP_NAME}:latest"""
+            def dst_tag = """${APP_NAME}:$abbrev"""
             
+            openshift.tag(src_tag, dst_tg)
             
             
           }
