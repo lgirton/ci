@@ -37,7 +37,8 @@ pipeline {
             def src_tag = """${APP_NAME}:latest"""
             def dst_tag = """${APP_NAME}:$abbrev"""
             
-            openshift.tag(src_tag, dst_tg)
+            echo """Tagging latest build git commit id: $dst_tag"""
+            openshift.tag(src_tag, dst_tag)
             
             
           }
