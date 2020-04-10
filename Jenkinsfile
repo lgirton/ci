@@ -31,8 +31,10 @@ pipeline {
           openshift.withCluster() {
             openshift.selector("bc", "${APP_NAME}").startBuild("--from-dir=target/ --build-loglevel=5").logs("-f")
             
+            // Extract abbreviated git commit id
             def props = readProperties file: "target/classes/git.properties"
             echo props['git.commit.id.abbrev']
+            echo "${GIT_REVISION,length=8}"
             
           }
         }
