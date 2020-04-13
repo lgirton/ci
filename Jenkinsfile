@@ -20,17 +20,15 @@ pipeline {
     }
     
     stage('Test') {
-      steps {
-        parallel {
-          stage('Unit Test') {
-            steps {
-              sh "mvn -B test"   
-            }
+      parallel {
+        stage('Unit Test') {
+          steps {
+            sh "mvn -B test"   
           }
-          stage('SonarQube') {
-            steps {
-              sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=http://sonarqube:9000"
-            }
+        }
+        stage('SonarQube') {
+          steps {
+            sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=http://sonarqube:9000"
           }
         }
       }
