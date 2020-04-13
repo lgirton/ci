@@ -21,7 +21,7 @@ pipeline {
     
     stage('Test') {
       steps {
-        pipeline {
+        parallel {
           stage('Unit Test') {
             steps {
               sh "mvn -B test"   
